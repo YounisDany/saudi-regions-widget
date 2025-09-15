@@ -1,0 +1,35 @@
+{
+  "name": "saudi-regions-widget",
+  "version": "1.0.0",
+  "description": "مكتبة JavaScript لإضافة حقول اختيار المناطق والمدن السعودية إلى المواقع",
+  "main": "saudi-regions-widget.js",
+  "keywords": [
+    "saudi",
+    "regions",
+    "cities",
+    "widget",
+    "javascript",
+    "saudi-arabia",
+    "المناطق",
+    "المدن",
+    "السعودية"
+  ],
+  "author": "Manus AI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/saudi-regions-widget.git"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/saudi-regions-widget#readme",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/saudi-regions-widget/issues"
+  },
+  "files": [
+    "saudi-regions-widget.js",
+    "demo.html",
+    "README.md"
+  ],
+  "jsdelivr": "saudi-regions-widget.js",
+  "unpkg": "saudi-regions-widget.js"
+}
+

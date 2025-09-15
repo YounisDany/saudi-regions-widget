@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة المناطق السعودية - Saudi Regions Widget</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .demo-section h2 {
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .demo-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        
+        .demo-item h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        
+        .output {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .code-section {
+            background: #2d3748;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .code-section pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        
+        .btn:hover {
+            background: #5a67d8;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .cdn-info {
+            background: #e6fffa;
+            border: 1px solid #38b2ac;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .cdn-info h3 {
+            color: #2c7a7b;
+            margin-top: 0;
+        }
+        
+        .copy-btn {
+            background: #38b2ac;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇸🇦 أداة المناطق السعودية</h1>
+            <p>مكتبة JavaScript سهلة الاستخدام لإضافة حقول اختيار المناطق والمدن السعودية إلى موقعك</p>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>سهولة الاستخدام</h3>
+                <p>إضافة سطر واحد من الكود لتفعيل الأداة</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌐</div>
+                <h3>دعم اللغتين</h3>
+                <p>العربية والإنجليزية مع إمكانية التبديل</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <h3>متجاوب</h3>
+                <p>يعمل على جميع الأجهزة والمتصفحات</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <h3>قابل للتخصيص</h3>
+                <p>أنماط وألوان قابلة للتعديل</p>
+            </div>
+        </div>
+
+        <div class="cdn-info">
+            <h3>📦 استخدام المكتبة عبر CDN</h3>
+            <p>أضف هذا السطر إلى صفحتك:</p>
+            <div class="code-section">
+                <button class="copy-btn" onclick="copyToClipboard('cdn-code')">نسخ</button>
+                <pre id="cdn-code">&lt;script src="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/saudi-regions-widget@main/saudi-regions-widget.js">&lt;/script></pre>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>🚀 أمثلة تفاعلية</h2>
+            
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>المثال الأساسي</h3>
+                    <div id="demo1"></div>
+                    <div class="output" id="output1">اختر منطقة ومدينة لرؤية النتيجة...</div>
+                    <button class="btn" onclick="resetDemo1()">إعادة تعيين</button>
+                </div>
+
+                <div class="demo-item">
+                    <h3>باللغة الإنجليزية</h3>
+                    <div id="demo2"></div>
+                    <div class="output" id="output2">Select region and city to see result...</div>
+                    <button class="btn" onclick="resetDemo2()">Reset</button>
+                </div>
+
+                <div class="demo-item">
+                    <h3>بدون تسميات</h3>
+                    <div id="demo3"></div>
+                    <div class="output" id="output3">اختر منطقة ومدينة لرؤية النتيجة...</div>
+                    <button class="btn" onclick="setRiyadh()">تعيين الرياض</button>
+                </div>
+
+                <div class="demo-item">
+                    <h3>تصميم مخصص</h3>
+                    <div id="demo4"></div>
+                    <div class="output" id="output4">اختر منطقة ومدينة لرؤية النتيجة...</div>
+                    <button class="btn" onclick="searchDemo()">بحث عن "مكة"</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>💻 أمثلة الكود</h2>
+            
+            <h3>الاستخدام الأساسي</h3>
+            <div class="code-section">
+                <button class="copy-btn" onclick="copyToClipboard('basic-code')">نسخ</button>
+                <pre id="basic-code">// HTML
+&lt;div id="regions-container">&lt;/div>
+
+// JavaScript
+const widget = createSaudiRegionsWidget('regions-container', {
+    onChange: function(data) {
+        console.log('تم الاختيار:', data);
+    }
+});</pre>
+            </div>
+
+            <h3>خيارات متقدمة</h3>
+            <div class="code-section">
+                <button class="copy-btn" onclick="copyToClipboard('advanced-code')">نسخ</button>
+                <pre id="advanced-code">const widget = new SaudiRegionsWidget({
+    language: 'en',                    // ar أو en
+    regionLabel: 'Region',             // تسمية حقل المنطقة
+    cityLabel: 'City',                 // تسمية حقل المدينة
+    regionPlaceholder: 'Select Region', // نص المنطقة الافتراضي
+    cityPlaceholder: 'Select City',     // نص المدينة الافتراضي
+    showLabels: true,                   // إظهار التسميات
+    customStyles: `
+        .saudi-regions-widget select {
+            border: 2px solid #007cba;
+            border-radius: 8px;
+        }
+    `,
+    onChange: function(data) {
+        if (data.region) {
+            console.log('المنطقة:', data.region.name);
+        }
+        if (data.city) {
+            console.log('المدينة:', data.city.name);
+        }
+    }
+});
+
+widget.render('container-id');</pre>
+            </div>
+
+            <h3>دوال مساعدة</h3>
+            <div class="code-section">
+                <button class="copy-btn" onclick="copyToClipboard('helper-code')">نسخ</button>
+                <pre id="helper-code">// البحث في المناطق
+const regions = widget.searchRegions('الرياض');
+
+// البحث في المدن
+const cities = widget.searchCities('جدة');
+
+// الحصول على جميع المناطق
+const allRegions = widget.getAllRegions();
+
+// الحصول على منطقة بالمعرف
+const region = widget.getRegionById('RD');
+
+// الحصول على مدن منطقة معينة
+const cities = widget.getCitiesByRegion('MQ');
+
+// تعيين قيم
+widget.setValue('RD', 'RD001'); // الرياض - الرياض
+
+// الحصول على القيم الحالية
+const currentValue = widget.getValue();
+
+// إعادة تعيين
+widget.reset();</pre>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>📋 دوال البحث والاستعلام</h2>
+            <div style="margin: 20px 0;">
+                <button class="btn" onclick="testSearch()">اختبار البحث</button>
+                <button class="btn" onclick="testGetAll()">عرض جميع المناطق</button>
+                <button class="btn" onclick="testGetCities()">مدن الرياض</button>
+            </div>
+            <div class="output" id="search-output">انقر على الأزرار لاختبار الدوال...</div>
+        </div>
+    </div>
+
+    <script src="saudi-regions-widget.js"></script>
+    <script>
+        // المثال الأساسي
+        const widget1 = createSaudiRegionsWidget('demo1', {
+            onChange: function(data) {
+                document.getElementById('output1').textContent = JSON.stringify(data, null, 2);
+            }
+        });
+
+        // المثال الإنجليزي
+        const widget2 = createSaudiRegionsWidget('demo2', {
+            language: 'en',
+            regionLabel: 'Region',
+            cityLabel: 'City',
+            regionPlaceholder: 'Select Region',
+            cityPlaceholder: 'Select City',
+            onChange: function(data) {
+                document.getElementById('output2').textContent = JSON.stringify(data, null, 2);
+            }
+        });
+
+        // بدون تسميات
+        const widget3 = createSaudiRegionsWidget('demo3', {
+            showLabels: false,
+            regionPlaceholder: 'اختر المنطقة...',
+            cityPlaceholder: 'اختر المدينة...',
+            onChange: function(data) {
+                document.getElementById('output3').textContent = JSON.stringify(data, null, 2);
+            }
+        });
+
+        // تصميم مخصص
+        const widget4 = createSaudiRegionsWidget('demo4', {
+            customStyles: `
+                .saudi-regions-widget select {
+                    border: 2px solid #667eea;
+                    border-radius: 8px;
+                    padding: 12px;
+                    background: linear-gradient(45deg, #f0f8ff, #e6f3ff);
+                }
+                .saudi-regions-widget select:focus {
+                    border-color: #764ba2;
+                    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+                }
+            `,
+            onChange: function(data) {
+                document.getElementById('output4').textContent = JSON.stringify(data, null, 2);
+            }
+        });
+
+        // دوال المساعدة
+        function resetDemo1() {
+            widget1.reset();
+            document.getElementById('output1').textContent = 'تم إعادة التعيين...';
+        }
+
+        function resetDemo2() {
+            widget2.reset();
+            document.getElementById('output2').textContent = 'Reset completed...';
+        }
+
+        function setRiyadh() {
+            widget3.setValue('RD', 'RD001');
+            document.getElementById('output3').textContent = JSON.stringify(widget3.getValue(), null, 2);
+        }
+
+        function searchDemo() {
+            const results = widget4.searchRegions('مكة');
+            document.getElementById('output4').textContent = 'نتائج البحث عن "مكة":\n' + JSON.stringify(results, null, 2);
+        }
+
+        function testSearch() {
+            const widget = new SaudiRegionsWidget();
+            const regionResults = widget.searchRegions('الرياض');
+            const cityResults = widget.searchCities('جدة');
+            
+            const output = `نتائج البحث في المناطق عن "الرياض":\n${JSON.stringify(regionResults, null, 2)}\n\nنتائج البحث في المدن عن "جدة":\n${JSON.stringify(cityResults, null, 2)}`;
+            document.getElementById('search-output').textContent = output;
+        }
+
+        function testGetAll() {
+            const widget = new SaudiRegionsWidget();
+            const allRegions = widget.getAllRegions();
+            document.getElementById('search-output').textContent = `جميع المناطق (${allRegions.length} منطقة):\n${JSON.stringify(allRegions.map(r => ({id: r.id, name_ar: r.name_ar})), null, 2)}`;
+        }
+
+        function testGetCities() {
+            const widget = new SaudiRegionsWidget();
+            const cities = widget.getCitiesByRegion('RD');
+            document.getElementById('search-output').textContent = `مدن منطقة الرياض (${cities.length} مدينة):\n${JSON.stringify(cities, null, 2)}`;
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('تم نسخ الكود!');
+            });
+        }
+    </script>
+</body>
+</html>
+
