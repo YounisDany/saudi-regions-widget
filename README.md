@@ -20,7 +20,7 @@
 ### عبر CDN (الطريقة الأسرع)
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/saudi-regions-widget@main/saudi-regions-widget.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/saudi-regions-widget.js"></script>
 ```
 
 ### عبر npm
@@ -44,7 +44,7 @@ npm install saudi-regions-widget
     <div id="regions-container"></div>
 
     <!-- تحميل المكتبة -->
-    <script src="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/saudi-regions-widget@main/saudi-regions-widget.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/saudi-regions-widget.js"></script>
     
     <script>
         // إنشاء الأداة
