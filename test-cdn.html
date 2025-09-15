@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار CDN - أداة المناطق السعودية</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+            background: #f5f5f5;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        
+        .test-section h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .result {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #5a67d8;
+        }
+        
+        .info {
+            background: #cce7ff;
+            border: 1px solid #99d6ff;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 اختبار CDN - أداة المناطق السعودية</h1>
+        
+        <div class="info">
+            <strong>رابط CDN:</strong><br>
+            <code>https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/saudi-regions-widget.js</code>
+        </div>
+        
+        <div class="test-section">
+            <h2>1. اختبار تحميل المكتبة</h2>
+            <div id="library-status" class="result">جاري الاختبار...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>2. اختبار الأداة الأساسية</h2>
+            <div id="widget-basic"></div>
+            <div id="basic-result" class="result">اختر منطقة ومدينة لرؤية النتيجة...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>3. اختبار الأداة باللغة الإنجليزية</h2>
+            <div id="widget-english"></div>
+            <div id="english-result" class="result">Select region and city to see result...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>4. اختبار دوال البحث</h2>
+            <button class="btn" onclick="testSearchFunctions()">اختبار البحث</button>
+            <div id="search-result" class="result">انقر على الزر لاختبار دوال البحث...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>5. اختبار دوال التحكم</h2>
+            <button class="btn" onclick="testControlFunctions()">اختبار التحكم</button>
+            <button class="btn" onclick="resetWidgets()">إعادة تعيين</button>
+            <div id="control-result" class="result">انقر على الأزرار لاختبار دوال التحكم...</div>
+        </div>
+    </div>
+
+    <!-- تحميل المكتبة من CDN -->
+    <script src="https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/saudi-regions-widget.js"></script>
+    
+    <script>
+        // متغيرات عامة
+        let basicWidget, englishWidget;
+        
+        // اختبار تحميل المكتبة
+        function testLibraryLoad() {
+            const statusDiv = document.getElementById('library-status');
+            
+            if (typeof SaudiRegionsWidget !== 'undefined' && typeof createSaudiRegionsWidget !== 'undefined') {
+                statusDiv.textContent = '✅ تم تحميل المكتبة بنجاح!\n\nالكلاسات والدوال المتاحة:\n- SaudiRegionsWidget\n- createSaudiRegionsWidget';
+                statusDiv.className = 'result success';
+                
+                // إنشاء الأدوات بعد التأكد من تحميل المكتبة
+                createWidgets();
+            } else {
+                statusDiv.textContent = '❌ فشل في تحميل المكتبة من CDN';
+                statusDiv.className = 'result error';
+            }
+        }
+        
+        // إنشاء الأدوات
+        function createWidgets() {
+            try {
+                // الأداة الأساسية
+                basicWidget = createSaudiRegionsWidget('widget-basic', {
+                    onChange: function(data) {
+                        document.getElementById('basic-result').textContent = 
+                            'النتيجة:\n' + JSON.stringify(data, null, 2);
+                        document.getElementById('basic-result').className = 'result success';
+                    }
+                });
+                
+                // الأداة الإنجليزية
+                englishWidget = createSaudiRegionsWidget('widget-english', {
+                    language: 'en',
+                    regionLabel: 'Region',
+                    cityLabel: 'City',
+                    regionPlaceholder: 'Select Region',
+                    cityPlaceholder: 'Select City',
+                    onChange: function(data) {
+                        document.getElementById('english-result').textContent = 
+                            'Result:\n' + JSON.stringify(data, null, 2);
+                        document.getElementById('english-result').className = 'result success';
+                    }
+                });
+                
+            } catch (error) {
+                console.error('خطأ في إنشاء الأدوات:', error);
+            }
+        }
+        
+        // اختبار دوال البحث
+        function testSearchFunctions() {
+            const resultDiv = document.getElementById('search-result');
+            
+            try {
+                const widget = new SaudiRegionsWidget();
+                
+                // اختبار البحث في المناطق
+                const regionResults = widget.searchRegions('الرياض');
+                
+                // اختبار البحث في المدن
+                const cityResults = widget.searchCities('جدة');
+                
+                // اختبار الحصول على جميع المناطق
+                const allRegions = widget.getAllRegions();
+                
+                // اختبار الحصول على مدن منطقة معينة
+                const riyadhCities = widget.getCitiesByRegion('RD');
+                
+                const results = `✅ نتائج اختبار البحث:
+
+1. البحث في المناطق عن "الرياض":
+   عدد النتائج: ${regionResults.length}
+   
+2. البحث في المدن عن "جدة":
+   عدد النتائج: ${cityResults.length}
+   
+3. جميع المناطق:
+   عدد المناطق: ${allRegions.length}
+   
+4. مدن منطقة الرياض:
+   عدد المدن: ${riyadhCities.length}
+
+جميع الدوال تعمل بشكل صحيح!`;
+                
+                resultDiv.textContent = results;
+                resultDiv.className = 'result success';
+                
+            } catch (error) {
+                resultDiv.textContent = '❌ خطأ في اختبار دوال البحث:\n' + error.message;
+                resultDiv.className = 'result error';
+            }
+        }
+        
+        // اختبار دوال التحكم
+        function testControlFunctions() {
+            const resultDiv = document.getElementById('control-result');
+            
+            try {
+                // تعيين قيم للأداة الأساسية
+                basicWidget.setValue('RD', 'RD001'); // الرياض - الرياض
+                
+                // الحصول على القيم
+                const currentValue = basicWidget.getValue();
+                
+                const results = `✅ نتائج اختبار التحكم:
+
+تم تعيين: الرياض - الرياض
+القيم الحالية:
+${JSON.stringify(currentValue, null, 2)}
+
+دوال التحكم تعمل بشكل صحيح!`;
+                
+                resultDiv.textContent = results;
+                resultDiv.className = 'result success';
+                
+            } catch (error) {
+                resultDiv.textContent = '❌ خطأ في اختبار دوال التحكم:\n' + error.message;
+                resultDiv.className = 'result error';
+            }
+        }
+        
+        // إعادة تعيين الأدوات
+        function resetWidgets() {
+            try {
+                basicWidget.reset();
+                englishWidget.reset();
+                
+                document.getElementById('basic-result').textContent = 'تم إعادة التعيين...';
+                document.getElementById('english-result').textContent = 'Reset completed...';
+                document.getElementById('control-result').textContent = 'تم إعادة تعيين جميع الأدوات!';
+                
+            } catch (error) {
+                console.error('خطأ في إعادة التعيين:', error);
+            }
+        }
+        
+        // تشغيل الاختبارات عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            setTimeout(testLibraryLoad, 1000); // انتظار ثانية للتأكد من تحميل المكتبة
+        });
+    </script>
+</body>
+</html>
+
