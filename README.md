@@ -23,11 +23,7 @@
 <script src="https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/saudi-regions-widget.js"></script>
 ```
 
-### عبر npm
 
-```bash
-npm install saudi-regions-widget
-```
 
 ## 📖 الاستخدام
 
@@ -277,11 +273,11 @@ const widget = new SaudiRegionsWidget({
 
 كل منطقة تحتوي على 10+ مدن رئيسية مع الأسماء باللغتين العربية والإنجليزية.
 
-## 🌐 أمثلة مباشرة
 
-- [المثال الأساسي](https://codepen.io/example/basic)
-- [مثال متقدم](https://codepen.io/example/advanced)
-- [مثال التخصيص](https://codepen.io/example/custom)
+
+
+
+
 
 ## 🤝 المساهمة
 
@@ -305,11 +301,10 @@ const widget = new SaudiRegionsWidget({
 
 ## 📞 الدعم
 
-للاستفسارات والدعم الفني:
-- فتح [Issue](https://github.com/YOUR_USERNAME/saudi-regions-widget/issues)
-- البريد الإلكتروني: support@example.com
+
+- البريد الإلكتروني: younisdany1@gmail.com
 
 ---
 
-**تم تطوير هذه المكتبة بواسطة Manus AI**
+
 
