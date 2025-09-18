@@ -374,7 +374,7 @@ npm run dev
 
 - 🐛 [الإبلاغ عن خطأ](https://github.com/YounisDany/saudi-regions-widget/issues)
 - 💡 [طلب ميزة جديدة](https://github.com/YounisDany/saudi-regions-widget/issues)
-- 📧 [التواصل المباشر](mailto:younis@example.com)
+- 📧 [التواصل المباشر](https://wa.me/966558147903)
 
 ## 🙏 شكر وتقدير
 
