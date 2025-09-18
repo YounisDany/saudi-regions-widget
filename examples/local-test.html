@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudi Regions Widget - اختبار محلي</title>
+    <link rel="stylesheet" href="../dist/saudi-regions-widget.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7fafc;
+            direction: rtl;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        
+        .example-section {
+            margin-bottom: 40px;
+        }
+        
+        .selections-display {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: monospace;
+            direction: ltr;
+            text-align: left;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #718096;
+        }
+        
+        .error {
+            background-color: #fed7d7;
+            border: 1px solid #feb2b2;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background-color: #c6f6d5;
+            border: 1px solid #9ae6b4;
+            color: #2f855a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        button {
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background-color: #3182ce;
+        }
+        
+        .test-results {
+            background-color: #e6fffa;
+            border: 1px solid #81e6d9;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .test-item {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        
+        .test-pass {
+            background-color: #c6f6d5;
+            color: #2f855a;
+        }
+        
+        .test-fail {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+    </style>
+</head>
+<body>
+    <h1>🇸🇦 مكتبة المناطق السعودية - اختبار محلي</h1>
+    
+    <div class="container">
+        <h2>اختبار تحميل البيانات</h2>
+        <div id="loading-test" class="loading">جاري اختبار تحميل البيانات...</div>
+        <div id="test-results" class="test-results" style="display: none;">
+            <h3>نتائج الاختبار:</h3>
+            <div id="test-items"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>اختبار المكتبة - اختيار متتالي</h2>
+        <div id="loading1" class="loading">جاري تحميل البيانات...</div>
+        <div id="widget1" style="display: none;"></div>
+        <div class="selections-display" id="selections1">
+            لم يتم اختيار أي عنصر بعد
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>اختبار المناطق فقط</h2>
+        <div id="loading2" class="loading">جاري تحميل البيانات...</div>
+        <div id="widget2" style="display: none;"></div>
+        <div class="selections-display" id="selections2">
+            لم يتم اختيار أي منطقة بعد
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>اختبار التحكم البرمجي</h2>
+        <button onclick="testProgrammaticControl()">اختبار التحكم البرمجي</button>
+        <button onclick="testSearch()">اختبار البحث</button>
+        <button onclick="testDataAccess()">اختبار الوصول للبيانات</button>
+        <div id="control-results" class="selections-display">
+            نتائج الاختبارات ستظهر هنا
+        </div>
+    </div>
+
+    <script src="../dist/saudi-regions-widget.js"></script>
+    <script>
+        let widget1, widget2;
+        let testResults = [];
+        
+        // Test data loading first
+        async function testDataLoading() {
+            const testItems = document.getElementById('test-items');
+            
+            try {
+                // Test regions data
+                const regionsResponse = await fetch('../dist/data/regions.min.json');
+                if (regionsResponse.ok) {
+                    const regionsData = await regionsResponse.json();
+                    addTestResult('تحميل بيانات المناطق', true, `تم تحميل ${Object.keys(regionsData).length} منطقة`);
+                } else {
+                    addTestResult('تحميل بيانات المناطق', false, 'فشل في تحميل البيانات');
+                }
+                
+                // Test cities data
+                const citiesResponse = await fetch('../dist/data/regions-cities.min.json');
+                if (citiesResponse.ok) {
+                    const citiesData = await citiesResponse.json();
+                    addTestResult('تحميل بيانات المدن', true, `تم تحميل ${Object.keys(citiesData.cities || {}).length} مدينة`);
+                } else {
+                    addTestResult('تحميل بيانات المدن', false, 'فشل في تحميل البيانات');
+                }
+                
+                // Test complete data
+                const completeResponse = await fetch('../dist/data/complete.min.json');
+                if (completeResponse.ok) {
+                    const completeData = await completeResponse.json();
+                    addTestResult('تحميل البيانات الكاملة', true, `تم تحميل البيانات الكاملة`);
+                } else {
+                    addTestResult('تحميل البيانات الكاملة', false, 'فشل في تحميل البيانات');
+                }
+                
+            } catch (error) {
+                addTestResult('اختبار تحميل البيانات', false, error.message);
+            }
+            
+            document.getElementById('loading-test').style.display = 'none';
+            document.getElementById('test-results').style.display = 'block';
+            
+            // Start widget tests after data loading test
+            startWidgetTests();
+        }
+        
+        function addTestResult(testName, passed, details) {
+            const testItems = document.getElementById('test-items');
+            const testItem = document.createElement('div');
+            testItem.className = `test-item ${passed ? 'test-pass' : 'test-fail'}`;
+            testItem.innerHTML = `
+                <strong>${passed ? '✅' : '❌'} ${testName}</strong><br>
+                <small>${details}</small>
+            `;
+            testItems.appendChild(testItem);
+        }
+        
+        function startWidgetTests() {
+            // Widget 1: Complete cascading selects
+            widget1 = new SaudiRegionsWidget({
+                dataLevel: 'complete',
+                language: 'ar',
+                rtl: true,
+                dataUrl: '../dist/data/'
+            });
+            
+            widget1.on('ready', function() {
+                document.getElementById('loading1').style.display = 'none';
+                document.getElementById('widget1').style.display = 'block';
+                widget1.createCascadingSelects('widget1');
+                addTestResult('إنشاء المكتبة الكاملة', true, 'تم إنشاء المكتبة بنجاح');
+            });
+            
+            widget1.on('regionChanged', function(data) {
+                updateSelections('selections1');
+                addTestResult('تغيير المنطقة', true, `تم اختيار: ${data.region.name_ar}`);
+            });
+            
+            widget1.on('cityChanged', function(data) {
+                updateSelections('selections1');
+                addTestResult('تغيير المدينة', true, `تم اختيار: ${data.city.name_ar}`);
+            });
+            
+            widget1.on('districtChanged', function(data) {
+                updateSelections('selections1');
+                addTestResult('تغيير الحي', true, `تم اختيار: ${data.district.name_ar}`);
+            });
+            
+            widget1.on('error', function(error) {
+                document.getElementById('loading1').innerHTML = 
+                    '<div class="error">خطأ في تحميل البيانات: ' + error.message + '</div>';
+                addTestResult('إنشاء المكتبة الكاملة', false, error.message);
+            });
+            
+            // Widget 2: Regions only
+            widget2 = new SaudiRegionsWidget({
+                dataLevel: 'regions',
+                language: 'ar',
+                rtl: true,
+                dataUrl: '../dist/data/'
+            });
+            
+            widget2.on('ready', function() {
+                document.getElementById('loading2').style.display = 'none';
+                document.getElementById('widget2').style.display = 'block';
+                const select = widget2.createRegionSelect('widget2');
+                addTestResult('إنشاء مكتبة المناطق', true, 'تم إنشاء مكتبة المناطق بنجاح');
+                
+                select.addEventListener('change', function(e) {
+                    const regionId = e.target.value;
+                    const region = widget2.getRegionById(regionId);
+                    document.getElementById('selections2').innerHTML = 
+                        regionId ? JSON.stringify(region, null, 2) : 'لم يتم اختيار أي منطقة بعد';
+                    
+                    if (regionId) {
+                        addTestResult('اختيار منطقة', true, `تم اختيار: ${region.name_ar}`);
+                    }
+                });
+            });
+            
+            widget2.on('error', function(error) {
+                document.getElementById('loading2').innerHTML = 
+                    '<div class="error">خطأ في تحميل البيانات: ' + error.message + '</div>';
+                addTestResult('إنشاء مكتبة المناطق', false, error.message);
+            });
+        }
+        
+        function updateSelections(elementId) {
+            const selections = widget1.getSelections('widget1');
+            document.getElementById(elementId).innerHTML = JSON.stringify(selections, null, 2);
+        }
+        
+        function testProgrammaticControl() {
+            if (!widget1 || !widget1.isLoaded) {
+                document.getElementById('control-results').textContent = 'المكتبة غير جاهزة بعد';
+                return;
+            }
+            
+            try {
+                // Test setting Riyadh
+                widget1.setSelections('widget1', { region: 1, city: 3 });
+                
+                setTimeout(() => {
+                    const selections = widget1.getSelections('widget1');
+                    document.getElementById('control-results').textContent = 
+                        'اختبار التحكم البرمجي - تم اختيار الرياض:\n' + JSON.stringify(selections, null, 2);
+                    addTestResult('التحكم البرمجي', true, 'تم اختيار الرياض برمجياً');
+                }, 500);
+                
+            } catch (error) {
+                document.getElementById('control-results').textContent = 'خطأ في التحكم البرمجي: ' + error.message;
+                addTestResult('التحكم البرمجي', false, error.message);
+            }
+        }
+        
+        function testSearch() {
+            if (!widget2 || !widget2.isLoaded) {
+                document.getElementById('control-results').textContent = 'المكتبة غير جاهزة بعد';
+                return;
+            }
+            
+            try {
+                const results = widget2.search('الرياض');
+                document.getElementById('control-results').textContent = 
+                    'نتائج البحث عن "الرياض":\n' + JSON.stringify(results, null, 2);
+                addTestResult('البحث', true, `تم العثور على ${results.length} نتيجة`);
+            } catch (error) {
+                document.getElementById('control-results').textContent = 'خطأ في البحث: ' + error.message;
+                addTestResult('البحث', false, error.message);
+            }
+        }
+        
+        function testDataAccess() {
+            if (!widget1 || !widget1.isLoaded) {
+                document.getElementById('control-results').textContent = 'المكتبة غير جاهزة بعد';
+                return;
+            }
+            
+            try {
+                const region = widget1.getRegionById(1);
+                const city = widget1.getCityById(3);
+                
+                const results = {
+                    region: region,
+                    city: city,
+                    version: SaudiRegionsWidget.getVersion()
+                };
+                
+                document.getElementById('control-results').textContent = 
+                    'اختبار الوصول للبيانات:\n' + JSON.stringify(results, null, 2);
+                addTestResult('الوصول للبيانات', true, 'تم الوصول للبيانات بنجاح');
+            } catch (error) {
+                document.getElementById('control-results').textContent = 'خطأ في الوصول للبيانات: ' + error.message;
+                addTestResult('الوصول للبيانات', false, error.message);
+            }
+        }
+        
+        // Start testing when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('بدء الاختبارات...');
+            testDataLoading();
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,48 @@
+{
+  "version": "2.0.0",
+  "generated": "2025-09-18T14:33:34.145Z",
+  "files": {
+    "saudi-regions-widget.js": {
+      "bytes": 16997,
+      "kb": "16.60",
+      "mb": "0.02"
+    },
+    "saudi-regions-widget.min.js": {
+      "bytes": 6873,
+      "kb": "6.71",
+      "mb": "0.01"
+    },
+    "saudi-regions-widget.css": {
+      "bytes": 5219,
+      "kb": "5.10",
+      "mb": "0.00"
+    },
+    "saudi-regions-widget.min.css": {
+      "bytes": 4020,
+      "kb": "3.93",
+      "mb": "0.00"
+    },
+    "saudi-regions-widget.bundle.min.js": {
+      "bytes": 11163,
+      "kb": "10.90",
+      "mb": "0.01"
+    }
+  },
+  "dataFiles": {
+    "regions.min.json": {
+      "bytes": 2080,
+      "kb": "2.03",
+      "mb": "0.00"
+    },
+    "regions-cities.min.json": {
+      "bytes": 539642,
+      "kb": "526.99",
+      "mb": "0.51"
+    },
+    "complete.min.json": {
+      "bytes": 1065868,
+      "kb": "1040.89",
+      "mb": "1.02"
+    }
+  }
+}

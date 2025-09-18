@@ -1,0 +1,245 @@
+/**
+ * Saudi Regions Widget Enhanced v2.0.0
+ * Built on 2025-09-18T14:30:21.661Z
+ * https://github.com/YounisDany/saudi-regions-widget
+ */
+/**
+ * Saudi Regions Widget Enhanced - CSS Styles
+ * Version 2.0.0
+ */
+
+/* Container */
+.saudi-widget-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    direction: ltr;
+}
+
+.saudi-widget-container[dir="rtl"] {
+    direction: rtl;
+}
+
+/* Select Elements */
+.saudi-widget-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #ffffff;
+    color: #2d3748;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    cursor: pointer;
+    min-height: 48px;
+    box-sizing: border-box;
+}
+
+.saudi-widget-select:hover {
+    border-color: #cbd5e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.saudi-widget-select:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.saudi-widget-select:disabled {
+    background-color: #f7fafc;
+    color: #a0aec0;
+    cursor: not-allowed;
+    border-color: #e2e8f0;
+}
+
+/* RTL Support */
+.saudi-widget-container[dir="rtl"] .saudi-widget-select {
+    text-align: right;
+}
+
+/* Options */
+.saudi-widget-option {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #2d3748;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .saudi-widget-container.horizontal {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .saudi-widget-container.horizontal .saudi-widget-select {
+        flex: 1;
+        margin-right: 12px;
+    }
+    
+    .saudi-widget-container.horizontal[dir="rtl"] .saudi-widget-select {
+        margin-right: 0;
+        margin-left: 12px;
+    }
+    
+    .saudi-widget-container.horizontal .saudi-widget-select:last-child {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+/* Search Input */
+.saudi-widget-search {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #2d3748;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.saudi-widget-search:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.saudi-widget-search::placeholder {
+    color: #a0aec0;
+}
+
+/* Loading State */
+.saudi-widget-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #718096;
+    font-size: 14px;
+}
+
+.saudi-widget-loading::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e2e8f0;
+    border-top: 2px solid #4299e1;
+    border-radius: 50%;
+    animation: saudi-widget-spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+.saudi-widget-container[dir="rtl"] .saudi-widget-loading::before {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+@keyframes saudi-widget-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.saudi-widget-error {
+    padding: 12px 16px;
+    background-color: #fed7d7;
+    border: 1px solid #feb2b2;
+    border-radius: 8px;
+    color: #c53030;
+    font-size: 14px;
+}
+
+/* Success State */
+.saudi-widget-success {
+    padding: 12px 16px;
+    background-color: #c6f6d5;
+    border: 1px solid #9ae6b4;
+    border-radius: 8px;
+    color: #2f855a;
+    font-size: 14px;
+}
+
+/* Dark Theme */
+.saudi-widget-container.dark {
+    color: #e2e8f0;
+}
+
+.saudi-widget-container.dark .saudi-widget-select {
+    background-color: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.saudi-widget-container.dark .saudi-widget-select:hover {
+    border-color: #718096;
+}
+
+.saudi-widget-container.dark .saudi-widget-select:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1);
+}
+
+.saudi-widget-container.dark .saudi-widget-select:disabled {
+    background-color: #1a202c;
+    color: #718096;
+    border-color: #2d3748;
+}
+
+.saudi-widget-container.dark .saudi-widget-search {
+    background-color: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.saudi-widget-container.dark .saudi-widget-search::placeholder {
+    color: #718096;
+}
+
+/* Compact Size */
+.saudi-widget-container.compact .saudi-widget-select {
+    padding: 8px 12px;
+    font-size: 13px;
+    min-height: 36px;
+}
+
+.saudi-widget-container.compact {
+    gap: 8px;
+}
+
+/* Large Size */
+.saudi-widget-container.large .saudi-widget-select {
+    padding: 16px 20px;
+    font-size: 16px;
+    min-height: 56px;
+}
+
+.saudi-widget-container.large {
+    gap: 16px;
+}
+
+/* Custom Colors */
+.saudi-widget-container.primary .saudi-widget-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.saudi-widget-container.success .saudi-widget-select:focus {
+    border-color: #48bb78;
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+}
+
+.saudi-widget-container.warning .saudi-widget-select:focus {
+    border-color: #ed8936;
+    box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.1);
+}
+
+.saudi-widget-container.danger .saudi-widget-select:focus {
+    border-color: #f56565;
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+}
+

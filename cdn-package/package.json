@@ -1,0 +1,41 @@
+{
+  "name": "saudi-regions-widget-enhanced",
+  "version": "2.0.0",
+  "description": "Enhanced Saudi Arabia regions, cities and districts widget with comprehensive data and CDN support",
+  "main": "saudi-regions-widget.min.js",
+  "style": "saudi-regions-widget.min.css",
+  "keywords": [
+    "saudi",
+    "arabia",
+    "regions",
+    "cities",
+    "districts",
+    "widget",
+    "dropdown",
+    "select",
+    "ksa",
+    "javascript",
+    "css",
+    "cdn"
+  ],
+  "author": "YounisDany",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YounisDany/saudi-regions-widget.git"
+  },
+  "homepage": "https://github.com/YounisDany/saudi-regions-widget",
+  "bugs": {
+    "url": "https://github.com/YounisDany/saudi-regions-widget/issues"
+  },
+  "files": [
+    "*.js",
+    "*.css",
+    "*.json",
+    "data/"
+  ],
+  "cdn": {
+    "jsdelivr": "https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/",
+    "unpkg": "https://unpkg.com/saudi-regions-widget-enhanced@2.0.0/"
+  }
+}

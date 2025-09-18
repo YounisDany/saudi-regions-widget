@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "generated": "2025-09-18T14:33:34.144Z",
+  "files": {
+    "saudi-regions-widget.min.js": "sha384-KNtoN5kUwZ0rqZV6SC13Gtu4VgeTz0jkZOsGN8datDMgRF8j9KES0lpjTegcjVHU",
+    "saudi-regions-widget.min.css": "sha384-ORJx39k2U/4y0TQ6NzDCPter31HQ6sR9i4XZHpwIcmPYQ5hY/A+HfoXLsYO4OpKC",
+    "saudi-regions-widget.bundle.min.js": "sha384-RRHQ55i6to0OVUJFdr2g5wVXZHN/4ZNZddpUSQppUPbHpD6U/uGzRIs6Dk/xIpjg"
+  },
+  "usage": {
+    "saudi-regions-widget.min.css": "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/saudi-regions-widget.min.css\" integrity=\"sha384-ORJx39k2U/4y0TQ6NzDCPter31HQ6sR9i4XZHpwIcmPYQ5hY/A+HfoXLsYO4OpKC\" crossorigin=\"anonymous\">",
+    "saudi-regions-widget.min.js": "<script src=\"https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/saudi-regions-widget.min.js\" integrity=\"sha384-KNtoN5kUwZ0rqZV6SC13Gtu4VgeTz0jkZOsGN8datDMgRF8j9KES0lpjTegcjVHU\" crossorigin=\"anonymous\"></script>",
+    "saudi-regions-widget.bundle.min.js": "<script src=\"https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/saudi-regions-widget.bundle.min.js\" integrity=\"sha384-RRHQ55i6to0OVUJFdr2g5wVXZHN/4ZNZddpUSQppUPbHpD6U/uGzRIs6Dk/xIpjg\" crossorigin=\"anonymous\"></script>"
+  }
+}

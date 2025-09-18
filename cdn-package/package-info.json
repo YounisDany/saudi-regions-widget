@@ -1,0 +1,20 @@
+{
+  "name": "saudi-regions-widget-enhanced",
+  "version": "2.0.0",
+  "description": "Enhanced Saudi Arabia regions, cities and districts widget",
+  "main": "saudi-regions-widget.min.js",
+  "style": "saudi-regions-widget.min.css",
+  "files": {
+    "saudi-regions-widget.js": "Unminified JavaScript",
+    "saudi-regions-widget.min.js": "Minified JavaScript",
+    "saudi-regions-widget.css": "Unminified CSS",
+    "saudi-regions-widget.min.css": "Minified CSS",
+    "saudi-regions-widget.bundle.min.js": "Combined JS + CSS",
+    "data/": "Data files directory"
+  },
+  "cdn": {
+    "jsdelivr": "https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/",
+    "unpkg": "https://unpkg.com/saudi-regions-widget-enhanced@2.0.0/dist/"
+  },
+  "built": "2025-09-18T14:30:21.662Z"
+}

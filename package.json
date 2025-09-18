@@ -1,35 +1,38 @@
 {
-  "name": "saudi-regions-widget",
-  "version": "1.0.0",
-  "description": "مكتبة JavaScript لإضافة حقول اختيار المناطق والمدن السعودية إلى المواقع",
-  "main": "saudi-regions-widget.js",
+  "name": "saudi-regions-widget-enhanced",
+  "version": "2.0.0",
+  "description": "Enhanced Saudi Arabia regions, cities and districts widget with comprehensive data and CDN support",
+  "main": "dist/saudi-regions-widget.min.js",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node test.js",
+    "dev": "node dev-server.js"
+  },
   "keywords": [
     "saudi",
+    "arabia",
     "regions",
     "cities",
+    "districts",
     "widget",
-    "javascript",
-    "saudi-arabia",
-    "المناطق",
-    "المدن",
-    "السعودية"
+    "dropdown",
+    "select",
+    "ksa"
   ],
-  "author": "Manus AI",
+  "author": "YounisDany",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YounisDany/saudi-regions-widget.git"
-  },
-  "homepage": "https://github.com/YounisDany/saudi-regions-widget#readme",
-  "bugs": {
-    "url": "https://github.com/YounisDany/saudi-regions-widget/issues"
+    "url": "https://github.com/YounisDany/saudi-regions-widget"
   },
   "files": [
-    "saudi-regions-widget.js",
-    "demo.html",
+    "dist/",
+    "src/",
+    "data/",
+    "examples/",
     "README.md"
   ],
-  "jsdelivr": "saudi-regions-widget.js",
-  "unpkg": "saudi-regions-widget.js"
+  "devDependencies": {
+    "terser": "^5.44.0"
+  }
 }
-
