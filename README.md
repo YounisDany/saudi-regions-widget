@@ -378,10 +378,10 @@ npm run dev
 
 ## 🙏 شكر وتقدير
 
-- البيانات مأخوذة من [مستودع homaily](https://github.com/homaily/Saudi-Arabia-Regions-Cities-and-Districts)
+
 - مصممة بحب للمطورين العرب 💚
 
 ---
 
-**صنع بـ ❤️ في المملكة العربية السعودية**
+**صنع بـ ❤️ في الجمهورية اليمنية  **
 
