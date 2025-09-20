@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة المناطق السعودية المحسنة - التوثيق</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        :root {
+            --primary-color: #E4B460;
+            --secondary-color: #2C2C2C;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --text-light: #666;
+            --bg-color: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --border-color: #e1e5e9;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        [data-theme="dark"] {
+            --text-color: #ffffff;
+            --text-light: #b0b0b0;
+            --bg-color: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --border-color: #404040;
+            --shadow: 0 2px 10px rgba(0,0,0,0.3);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: all 0.3s ease;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), #d4a853);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nav {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .section:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+
+        .section:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .section h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 40px 0 20px 0;
+            color: var(--text-color);
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            overflow-x: auto;
+            position: relative;
+            box-shadow: var(--shadow);
+            direction: ltr;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-secondary);
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(228, 180, 96, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #d4a853;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer p {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform-origin: right;
+            transform: scaleX(0);
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator"></div>
+    
+    <button class="theme-toggle" onclick="toggleTheme()">
+        🌙/☀️
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>أداة المناطق السعودية المحسنة</h1>
+                <p>مكتبة JavaScript شاملة للمناطق والمدن والأحياء السعودية مع دعم CDN وميزات متقدمة</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <strong>📍 أداة المناطق السعودية</strong>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#introduction">مقدمة</a></li>
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#installation">التثبيت</a></li>
+                    <li><a href="#usage">الاستخدام</a></li>
+                    <li><a href="#examples">أمثلة</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="container">
+            <section id="introduction" class="section">
+                <h2>1. مقدمة</h2>
+                <p>أداة المناطق السعودية المحسنة هي مكتبة JavaScript شاملة ومحسّنة مصممة لتوفير حل سهل الاستخدام لدمج بيانات المناطق والمدن والأحياء السعودية في أي تطبيق ويب. توفر هذه الأداة طريقة قوية ومرنة للتعامل مع البيانات الجغرافية الخاصة بالمملكة العربية السعودية، مما يجعلها مثالية للمطورين الذين يبنون تطبيقات تتطلب وظائف تعتمد على الموقع.</p>
+                
+                <p>بفضل دعم CDN، وقدرات البحث المتقدمة، والتصميم المتجاوب، تهدف هذه الأداة إلى تبسيط عملية التطوير وتحسين تجربة المستخدم. سيرشدك هذا التوثيق خلال عملية تثبيت أداة المناطق السعودية المحسنة، وتكوينها، واستخدامها، مع تقديم أمثلة مفصلة وأفضل الممارسات.</p>
+            </section>
+
+            <section id="features" class="section">
+                <h2>2. المميزات</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📊 بيانات شاملة</h4>
+                        <p>جميع المناطق السعودية الـ 13، وأكثر من 4500 مدينة، وأكثر من 3700 حي، مما يضمن مجموعة بيانات غنية للخدمات القائمة على الموقع.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🚀 دعم CDN</h4>
+                        <p>متاح عبر خدمات شهيرة مثل jsDelivr و unpkg للتكامل السريع وأوقات التحميل السريعة.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 سهولة الاستخدام</h4>
+                        <p>إعداد الأداة بسطر واحد من التعليمات البرمجية، مثالي للتطوير والنشر السريع.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔍 بحث متقدم</h4>
+                        <p>إمكانيات بحث وتصفية قوية تجعل من السهل العثور على مواقع محددة بسرعة.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌐 دعم RTL</h4>
+                        <p>محسّن خصيصًا للغة العربية مع دعم من اليمين إلى اليسار لتجربة مستخدم طبيعية.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📱 تصميم متجاوب</h4>
+                        <p>واجهة مستخدم جميلة ومتكيفة تعمل بسلاسة عبر جميع الأجهزة وأحجام الشاشات.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="installation" class="section">
+                <h2>3. التثبيت</h2>
+                <p>دمج أداة المناطق السعودية المحسنة في مشروعك أمر بسيط. اختر من بين عدة طرق للتثبيت حسب احتياجات مشروعك وسير عمل التطوير.</p>
+
+                <h3>عبر CDN (الطريقة الموصى بها)</h3>
+                <p>الطريقة الأسرع والأكثر توصية لتضمين الأداة هي باستخدام شبكة توصيل المحتوى (CDN). ما عليك سوى إضافة العلامات التالية إلى HTML الخاص بك:</p>
+                
+                <div class="code-block" data-lang="HTML">
+                    <pre><code>&lt;!-- CSS --&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/saudi-regions-widget.min.css"&gt;
+
+&lt;!-- JavaScript --&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/saudi-regions-widget.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- أو استخدم الملف المدمج (JS + CSS) --&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/saudi-regions-widget.bundle.min.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+
+                <h3>عبر NPM</h3>
+                <p>للمشاريع التي تستخدم Node.js ومدير حزم مثل npm، قم بتثبيت الأداة كاعتمادية:</p>
+                
+                <div class="code-block" data-lang="BASH">
+                    <pre><code>npm install saudi-regions-widget-enhanced</code></pre>
+                </div>
+
+                <h3>تحميل مباشر</h3>
+                <p>قم بتنزيل ملفات الأداة مباشرة من صفحة الإصدارات على GitHub وقم بتضمينها في مشروعك كأصول محلية.</p>
+            </section>
+
+            <section id="usage" class="section">
+                <h2>4. الاستخدام</h2>
+                <p>بمجرد التثبيت، يمكن دمج أداة المناطق السعودية المحسنة بسهولة في صفحة الويب الخاصة بك. هناك طريقتان أساسيتان لاستخدام الأداة: إعداد سريع للاحتياجات الأساسية وإعداد مفصل للتخصيص المتقدم.</p>
+
+                <h3>الإعداد السريع</h3>
+                <p>للنشر السريع، تتيح لك طريقة createQuick تهيئة الأداة بأقل قدر من التكوين:</p>
+                
+                <div class="code-block" data-lang="HTML">
+                    <pre><code>&lt;div id="saudi-widget"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+// إنشاء الأداة بسطر واحد من التعليمات البرمجية
+SaudiRegionsWidget.createQuick("saudi-widget", {
+    language: "ar", // 'ar' أو 'en'
+    rtl: true // تعيين إلى true للعرض من اليمين إلى اليسار
+});
+&lt;/script&gt;</code></pre>
+                </div>
+
+                <h3>الإعداد التفصيلي</h3>
+                <p>لتحكم أكثر دقة في سلوك الأداة ومستويات البيانات ومعالجة الأحداث:</p>
+                
+                <div class="code-block" data-lang="JavaScript">
+                    <pre><code>// إنشاء مثيل جديد
+const widget = new SaudiRegionsWidget({
+    dataLevel: "complete", // 'regions', 'regions-cities', 'complete'
+    language: "ar", // 'ar' أو 'en'
+    rtl: true,
+    dataUrl: "https://cdn.jsdelivr.net/gh/YounisDany/saudi-regions-widget@main/dist/data/"
+});
+
+// انتظار تحميل البيانات
+widget.on("ready", function() {
+    // إنشاء قوائم متتالية (منطقة -> مدينة -> حي)
+    widget.createCascadingSelects("widget-container");
+});
+
+// الاستماع للأحداث
+widget.on("regionChanged", function(data) {
+    console.log("تم اختيار منطقة:", data.region);
+});
+
+widget.on("cityChanged", function(data) {
+    console.log("تم اختيار مدينة:", data.city);
+});
+
+widget.on("districtChanged", function(data) {
+    console.log("تم اختيار حي:", data.district);
+});</code></pre>
+                </div>
+            </section>
+
+            <section id="configuration" class="section">
+                <h2>5. خيارات التكوين</h2>
+                <p>يقبل مُنشئ SaudiRegionsWidget كائن خيارات يسمح لك بتخصيص جوانب مختلفة من سلوك الأداة ومظهرها:</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الخيار</th>
+                                <th>النوع</th>
+                                <th>الافتراضي</th>
+                                <th>الوصف</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>dataLevel</td>
+                                <td>String</td>
+                                <td>'complete'</td>
+                                <td>مستوى البيانات الجغرافية المراد تحميلها</td>
+                            </tr>
+                            <tr>
+                                <td>language</td>
+                                <td>String</td>
+                                <td>'en'</td>
+                                <td>لغة العرض ('ar' أو 'en')</td>
+                            </tr>
+                            <tr>
+                                <td>rtl</td>
+                                <td>Boolean</td>
+                                <td>false</td>
+                                <td>اتجاه النص من اليمين إلى اليسار</td>
+                            </tr>
+                            <tr>
+                                <td>searchEnabled</td>
+                                <td>Boolean</td>
+                                <td>true</td>
+                                <td>تفعيل وظيفة البحث</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="data-levels" class="section">
+                <h2>9. مستويات البيانات</h2>
+                <p>توفر الأداة مستويات بيانات مختلفة لتحسين الأداء بناءً على احتياجات تطبيقك:</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>مستوى البيانات</th>
+                                <th>الحجم</th>
+                                <th>الوصف</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>regions</td>
+                                <td>~2 كيلوبايت</td>
+                                <td>يحمل المناطق السعودية الـ 13 فقط</td>
+                            </tr>
+                            <tr>
+                                <td>regions-cities</td>
+                                <td>~85 كيلوبايت</td>
+                                <td>يحمل المناطق والمدن التابعة لها</td>
+                            </tr>
+                            <tr>
+                                <td>complete</td>
+                                <td>~1.2 ميجابايت</td>
+                                <td>يحمل المناطق والمدن وجميع الأحياء</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="examples" class="section">
+                <h2>11. أمثلة التطبيق</h2>
+                <p>أداة المناطق السعودية المحسنة مستقلة عن الأطر ويمكن دمجها في أطر JavaScript المختلفة:</p>
+
+                <h3>تكامل React</h3>
+                <div class="code-block" data-lang="JSX">
+                    <pre><code>import { useEffect, useRef } from 'react';
+
+function SaudiRegionsComponent() {
+    const widgetRef = useRef(null);
+    
+    useEffect(() => {
+        const widget = window.SaudiRegionsWidget.createQuick('saudi-widget', {
+            language: 'ar',
+            rtl: true
+        });
+        
+        widget.on('regionChanged', (data) => {
+            console.log('تم تغيير المنطقة:', data);
+        });
+        
+        return () => widget.destroy('saudi-widget');
+    }, []);
+    
+    return &lt;div id="saudi-widget" ref={widgetRef}&gt;&lt;/div&gt;;
+}</code></pre>
+                </div>
+
+                <h3>تكامل Vue.js</h3>
+                <div class="code-block" data-lang="Vue">
+                    <pre><code>&lt;template&gt;
+    &lt;div id="saudi-widget"&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    mounted() {
+        this.widget = window.SaudiRegionsWidget.createQuick('saudi-widget', {
+            language: 'ar',
+            rtl: true
+        });
+        
+        this.widget.on('regionChanged', this.handleRegionChange);
+    },
+    
+    beforeDestroy() {
+        if (this.widget) {
+            this.widget.destroy('saudi-widget');
+        }
+    },
+    
+    methods: {
+        handleRegionChange(data) {
+            console.log('تم تغيير المنطقة:', data);
+        }
+    }
+}
+&lt;/script&gt;</code></pre>
+                </div>
+            </section>
+
+            <section id="support" class="section">
+                <h2>15. الدعم</h2>
+                <p>إذا واجهت أي مشكلات، أو كانت لديك أسئلة، أو احتجت إلى مساعدة، يرجى الرجوع إلى الموارد التالية:</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🐛 الإبلاغ عن خطأ</h4>
+                        <p>وجدت مشكلة؟ أبلغ عنها في صفحة المشكلات على GitHub.</p>
+                        <a href="https://github.com/YounisDany/saudi-regions-widget/issues" class="btn btn-secondary">الإبلاغ عن مشكلة</a>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💡 طلب ميزة</h4>
+                        <p>لديك فكرة للتحسين؟ أخبرنا!</p>
+                        <a href="https://github.com/YounisDany/saudi-regions-widget/issues" class="btn btn-secondary">طلب ميزة</a>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📧 التواصل المباشر</h4>
+                        <p>تحتاج مساعدة فورية؟ تواصل معنا مباشرة.</p>
+                        <a href="https://wa.me/966558147903" class="btn">تواصل معنا</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>صنع بـ ❤️ في الجمهورية اليمنية | مرخص تحت MIT</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script>
+        // وظيفة تبديل السمة
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // تحميل السمة المحفوظة
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+
+        // مؤشر التمرير
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-indicator').style.transform = `scaleX(${scrolled / 100})`;
+        });
+
+        // التمرير السلس لروابط التنقل
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // إضافة مراقب التقاطع للرسوم المتحركة
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+
