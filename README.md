@@ -35,7 +35,7 @@
 ### عبر NPM
 
 ```bash
-npm install saudi-regions-widget-enhanced
+npm install saudi-regions-widget
 ```
 
 ### تحميل مباشر
