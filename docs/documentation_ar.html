@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <style>
         :root {
-            --primary-color: #E4B460;
+            --primary-color: #006C35;
             --secondary-color: #2C2C2C;
             --accent-color: #4CAF50;
             --text-color: #333;
@@ -52,7 +52,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-color), #d4a853);
+            background: linear-gradient(135deg, var(--primary-color), #008f44);
             color: white;
             padding: 60px 0;
             text-align: center;
@@ -107,6 +107,44 @@
         .theme-toggle:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
+        }
+
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px; /* Changed from left to right for RTL */
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: #006C35;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #006C35;
+        }
+
+        .lang-btn:hover {
+            background: #005a2d;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #006C35;
+            border: 2px solid #006C35;
+        }
+
+        [data-theme="dark"] .lang-btn.active {
+            background: var(--bg-secondary);
+            color: #006C35;
+            border: 2px solid #006C35;
         }
 
         .nav {
@@ -377,6 +415,10 @@
 <body>
     <div class="scroll-indicator"></div>
     
+    <div class="language-switcher">
+        <a href="documentation_ar.html" class="lang-btn ar active">العربية</a>
+        <a href="documentation_en.html" class="lang-btn en">English</a>
+    </div>
     <button class="theme-toggle" onclick="toggleTheme()">
         🌙/☀️
     </button>
